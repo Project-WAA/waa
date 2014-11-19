@@ -5,8 +5,12 @@
  */
 package cs.question;
 
+import cs.database.QuestionEntity;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import waa.demo.hibernate.Answeroptions;
@@ -82,28 +86,40 @@ public class QuestionBean implements Serializable{
     
     public void saveQuestion()
     {
-        for(int i=0;i<selectedOptionsList.size();i++)
+        try 
         {
+                QuestionEntity qe = new QuestionEntity();
+
+                int qID = qe.SaveQuestion(question);
+                if(qID > 0)
+                {
+                    for (Answeroptions opt : optionsList)
+                    {
+                        qe.SaveOptions(qID,opt);
+                        System.out.println("test");
+                    }
+                }
+            } 
+        catch (SQLException ex) 
+                    {
+            //Logger.getLogger(QuestionBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+            /*
+            for(int i=0;i<selectedOptionsList.size();i++)
+            {
             for(int j=0;j<optionsList.size();j++)
             {
-                if(selectedOptionsList.get(i).getAnswerOptionsId() == optionsList.get(j).getAnswerOptionsId())
-                {
-                    //optionsList.get(j).setIsAnswer(Boolean.TRUE);
-                    break;
-                }
+            if(selectedOptionsList.get(i).getAnswerOptionsId() == optionsList.get(j).getAnswerOptionsId())
+            {
+            //optionsList.get(j).setIsAnswer(Boolean.TRUE);
+            break;
             }
-        }
+            }
+            }
+            */
         
-        if(optionsList != null && optionsList.size() > 0 )
-        {
-            System.out.println(selectedOptionsList.size());
-            //System.out.println(optionsList.get(0).getIsAnswer().toString());
-            //System.out.println(optionsList.get(1).getAnswerItem());
-            
-        }
-        else
-        {
-            System.out.println("no items");
-        }
+        
+        
     }
 }
