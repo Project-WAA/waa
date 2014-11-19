@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-   <head><title>IGNORED</title></head>
+   <head><title>Login</title></head>
    <body>
       <ui:composition template="/templates/masterLayout.xhtml">
          <ui:define name="windowTitle">
@@ -22,13 +22,14 @@
             <h:form>
                <h:panelGrid columns="2">
                   UserName:
-                  <h:inputText id="name" />
+                  <h:inputText id="name"  />
                   Password:
-                  <h:inputSecret id="password" />
+                  <h:inputSecret id="password"  />
                </h:panelGrid>
                
                    <div style="margin-left: 168px">
-                        <h:commandButton value="     Login     " action="createQuestion.xhtml"/>
+                       
+                       <h:commandButton value="Login" action="createQuestion"/>
                   </div>
                
             </h:form>

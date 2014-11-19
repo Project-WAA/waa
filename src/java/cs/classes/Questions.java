@@ -1,4 +1,4 @@
-package waa.demo.hibernate;
+package cs.classes;
 // Generated Nov 18, 2014 7:49:01 PM by Hibernate Tools 3.6.0
 
 
@@ -16,17 +16,26 @@ public class Questions  implements java.io.Serializable {
      private String questionDescription;
      private Set<Answeroptions> answeroptionses = new HashSet<Answeroptions>(0);
      private Integer mark;
+     private String course;
 
+    public String getCourse() {
+        return course;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
+    }
     
 
     public Questions() {
     }
 
-    public Questions(Quiz quiz, String questionDescription, Set<Answeroptions> answeroptionses, Integer mark) {
+    public Questions(Quiz quiz, String questionDescription, Set<Answeroptions> answeroptionses, Integer mark,String course) {
        this.quiz = quiz;
        this.questionDescription = questionDescription;
        this.answeroptionses = answeroptionses;
        this.mark = mark;
+       this.course = course;
     }
    
     public Integer getMark() {

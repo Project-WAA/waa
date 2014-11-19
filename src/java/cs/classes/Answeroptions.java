@@ -1,4 +1,4 @@
-package waa.demo.hibernate;
+package cs.classes;
 // Generated Nov 18, 2014 7:49:01 PM by Hibernate Tools 3.6.0
 
 

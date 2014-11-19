@@ -10,8 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import waa.demo.hibernate.Answeroptions;
-import waa.demo.hibernate.Questions;
+import cs.classes.Answeroptions;
+import cs.classes.Questions;
 
 /**
  *
@@ -28,13 +28,18 @@ public class QuestionEntity
     
     public int SaveQuestion(Questions question) throws SQLException
     {
-        String qry="Insert into Questions(quizID,QuestionDescription,mark)"+
+        String qry="Insert into Questions(CourseId,QuestionDescription,Answer,Mark,EnteredBy)"+
                 "values("+1+",'"+question.getQuestionDescription()+"',"+question.getMark()+")";
         System.out.println(qry);
         int id = connectMySql.insetAndGetID(qry);
         return id;
     }
-    
+//    QuestionID int primary key auto_increment,
+//CourseId int, 
+//QuestionDescription varchar(800),  
+//Answer varchar(800),  
+//Mark int,
+//EnteredBy varchar(255)  
     public void SaveOptions(int questionID, Answeroptions options)
     {
         String qry="Insert into AnswerOptions(QuestionID,AnswerItem,isAnswer)"+

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cs.question;
+package cs.bean;
 
 import cs.database.QuestionEntity;
 import java.io.Serializable;
@@ -13,8 +13,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import waa.demo.hibernate.Answeroptions;
-import waa.demo.hibernate.Questions;
+import cs.classes.Answeroptions;
+import cs.classes.Questions;
 
 /**
  *
@@ -27,8 +27,18 @@ public class QuestionBean implements Serializable{
     
     private Questions question = new Questions();
     private ArrayList<Answeroptions> optionsList  = new ArrayList<Answeroptions>();
-    private ArrayList<Answeroptions> selectedOptionsList  = new ArrayList<Answeroptions>();
+   private ArrayList<Answeroptions> selectedOptionsList  = new ArrayList<Answeroptions>();
+    private Answeroptions correctAnswer = new Answeroptions();
     private Answeroptions option = new Answeroptions();
+    private String correctAnswerItem;
+
+    public String getCorrectAnswerItem() {
+        return correctAnswerItem;
+    }
+
+    public void setCorrectAnswerItem(String correctAnswerItem) {
+        this.correctAnswerItem = correctAnswerItem;
+    }
     
     public String redirectQuestion(){
         option = new Answeroptions();
@@ -52,6 +62,14 @@ public class QuestionBean implements Serializable{
 
     public void setSelectedOptionsList(ArrayList<Answeroptions> selectedOptionsList) {
         this.selectedOptionsList = selectedOptionsList;
+    }
+
+    public Answeroptions getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    public void setCorrectAnswer(Answeroptions correctAnswer) {
+        this.correctAnswer = correctAnswer;
     }
     
 
@@ -84,6 +102,7 @@ public class QuestionBean implements Serializable{
         System.out.println(optionsList);
     }
     
+    
     public void saveQuestion()
     {
         try 
@@ -95,6 +114,15 @@ public class QuestionBean implements Serializable{
                 {
                     for (Answeroptions opt : optionsList)
                     {
+                        System.out.println("selected:" + correctAnswerItem);
+                        if(opt.getAnswerItem().equals(correctAnswerItem))
+                        {
+                            opt.setIsAnswer(Boolean.TRUE);
+                        }
+                        else
+                        {
+                            opt.setIsAnswer(Boolean.FALSE);
+                        }
                         qe.SaveOptions(qID,opt);
                         System.out.println("test");
                     }

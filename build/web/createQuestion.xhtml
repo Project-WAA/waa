@@ -30,9 +30,9 @@
                         <h:outputText value="Course: "/>
                     </td>
                     <td>
-                        <h:selectOneListbox id="ddlCourse" style="width: 257px">
-                            <f:selectItem id="item1" itemLabel="Web Application Architecture" itemValue="waa" />
-                            <f:selectItem id="item2" itemLabel="Software Engineering" itemValue="se" />
+                        <h:selectOneListbox id="ddlCourse" value="#{questionBean.question.course}" style="width: 257px">
+                            <f:selectItem id="item1" itemLabel="Web Application Architecture" itemValue="1" />
+                            <f:selectItem id="item2" itemLabel="Software Engineering" itemValue="2" />
 
                          </h:selectOneListbox><br></br>
                     </td>
@@ -64,12 +64,12 @@
                     <td width="50px"></td>
                     <td rowspan="3" colspan="3">
                         <div id="divOptions">
-                            <h:selectManyCheckbox id="chkOptions" value="#{questionBean.selectedOptionsList}" layout="pageDirection">
+                            <h:selectOneRadio id="chkOptions" value="#{questionBean.correctAnswerItem}" layout="pageDirection">
                                 <f:selectItems 
                                     value="#{questionBean.optionsList}" var="opt"
-                                    itemValue="#{opt.isAnswer}" itemLabel="#{opt.answerItem}" />
+                                    itemValue="#{opt.answerItem}" itemLabel="#{opt.answerItem}" />
 
-                            </h:selectManyCheckbox>
+                            </h:selectOneRadio >
                         </div>
                     </td>
                     <td></td>

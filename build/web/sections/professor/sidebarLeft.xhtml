@@ -11,10 +11,7 @@
                 <div class="welcome">
                     #{msgs.loginWelcome}	   	  
                     <div class="welcomeImage">
-                        <!--                        <a href="createQuestion.xhtml">
-                                                <h:graphicImage library="images" name="question.jpg" width="100"/><br></br>
-                                                Create Questions
-                                                    </a>-->
+
                         <h:commandLink action="#{questionBean.redirectQuestion()}">
                             <h:graphicImage library="images" name="question.jpg" width="100"/>
                             <br></br>New Question
