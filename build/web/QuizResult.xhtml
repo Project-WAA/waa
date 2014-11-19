@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+   <head><title>IGNORED</title></head>
+   <body>
+      <ui:composition template="/templates/masterLayout.xhtml">
+         <ui:define name="windowTitle">
+            #{msgs.loginTitle}
+         </ui:define>
+
+         <ui:define name="heading">
+            <ui:include src="/sections/professor/header.xhtml"/>
+         </ui:define>
+
+         <ui:define name="sidebarLeft">
+            <ui:include src="/sections/professor/sidebarLeft.xhtml"/>
+         </ui:define>
+
+         <ui:define name="content">
+        <h:form>
+            <h2>Quiz Result</h2>
+            
+            <table>
+                <tr>
+                    <td>
+                        <h:outputText value="Quiz Title "/>
+                    </td>
+                    <td>
+                        <h:selectOneListbox id="ddlQuizTitle" style="width: 257px" >
+                            <f:selectItem id="w1d1" itemLabel="Week1 Day1 Quiz" itemValue="11" />
+                            <f:selectItem id="w1d2" itemLabel="Week One Day Two" itemValue="12" />
+
+                         </h:selectOneListbox>
+                    </td>
+                    <td width="50px"></td>
+                    
+                </tr>
+                
+            </table>
+
+
+            <div>
+                <h:outputText value="Quiz's result"/>
+                 <h:dataTable value="#{users.userlist}" var="user">
+                    
+                    <h:column>
+                       <f:facet name="header">Question</f:facet>
+                       #{user.firstName}
+                    </h:column>
+                              <h:column>
+                       <f:facet name="header">Answer</f:facet>
+                       #{user.lastName}
+                    </h:column>
+                    <h:column>
+                       <f:facet name="header">User Name</f:facet>
+                       #{user.userName}
+                    </h:column>
+
+                 </h:dataTable>
+                <br></br>
+                
+            </div>
+
+            <hr></hr>
+            <h:commandButton value="close" action="button"/>  
+        </h:form>
+        
+        </ui:define>
+      </ui:composition>
+   </body>
+</html>

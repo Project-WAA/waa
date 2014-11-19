@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <!--      xmlns:corejsf="http://corejsf.com/facelets">-->
+    <head><title>IGNORED</title></head>  
+    <body>        
+        <ui:composition>    
+            <h:form>
+                <div class="welcome">
+                    #{msgs.loginWelcome}	   	  
+                    <div class="welcomeImage">
+                        <!--                        <a href="createQuestion.xhtml">
+                                                <h:graphicImage library="images" name="question.jpg" width="100"/><br></br>
+                                                Create Questions
+                                                    </a>-->
+                        <h:commandLink action="#{questionBean.redirectQuestion()}">
+                            <h:graphicImage library="images" name="question.jpg" width="100"/>
+                            <br></br>New Question
+                        </h:commandLink>
+                    </div>
+                    <div class="welcomeImage">
+                        <a href="CreateQuiz.xhtml">
+                            <h:graphicImage library="images" name="quiz.jpg" width="100"/><br></br>
+                            Create Quiz</a>
+                    </div>
+                    <div class="welcomeImage">
+                        <a href="AssignQuiz.xhtml">
+                            <h:graphicImage library="images" name="assign.jpg" width="100"/><br></br>
+                            Assign Quiz</a>
+                    </div>
+                    <div class="welcomeImage">
+                        <a href="QuizResult.xhtml">
+                            <h:graphicImage library="images" name="result.jpg" width="100"/><br></br>
+                            Result</a>
+                    </div>
+
+                </div>
+            </h:form>	    
+        </ui:composition>
+    </body>
+</html> 

@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+   <head><title>IGNORED</title></head>
+   <body>
+      <ui:composition template="/templates/masterLayout.xhtml">
+         <ui:define name="windowTitle">
+            #{msgs.loginTitle}
+         </ui:define>
+
+         <ui:define name="heading">
+            <ui:include src="/sections/professor/header.xhtml"/>
+         </ui:define>
+
+         <ui:define name="sidebarLeft">
+            <ui:include src="/sections/professor/sidebarLeft.xhtml"/>
+         </ui:define>
+
+         <ui:define name="content">
+        <h:form>
+            <h2>Create Quiz</h2>
+            <hr></hr>
+
+            <table>
+                <tr>
+                    <td>
+                        <h:outputText value="Course: "/>
+                    </td>
+                    <td>
+                        <h:selectOneListbox id="ddlCourse" >
+                            <f:selectItem id="item1" itemLabel="Web Application Architecture" itemValue="waa" />
+                            <f:selectItem id="item2" itemLabel="Software Engineering" itemValue="se" />
+
+                         </h:selectOneListbox>
+                    </td>
+                    <td width="50px"></td>
+                    <td>
+                        <h:outputText value="Start Date Time "/>
+
+                    </td>
+                    <td>
+                        <h:inputText id="txtStart" />
+
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <h:outputText value="Quiz Title: "/>
+
+                    </td>
+                    <td>
+                        <h:inputText id="txtQuizTitle" />
+                    </td>
+                    <td width="50px"></td>
+                    <td>
+                        <h:outputText value="End Date Time "/>
+
+                    </td>
+                    <td>
+                         <h:inputText id="txtEnd" />
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td width="50px"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td width="50px"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td width="50px"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td width="50px"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+
+
+            <div>
+                <h:outputText value="List of questions"/>
+                 <h:dataTable value="#{quizItem.questions}" var="question"
+                    styleClass="employeeTable"
+                    headerClass="employeeTuserDataableHeader"
+                    rowClasses="employeeTableOddRow,employeeTableEvenRow">
+                    <h:column>    				
+                       <f:facet name="header">Select</f:facet>    				
+                       <h:selectManyCheckbox id="chkSelct" ></h:selectManyCheckbox>
+                    </h:column>
+                    <h:column>
+                       <f:facet name="header">Question</f:facet>
+                       #{question.question}
+                    </h:column>
+                    <h:column>
+                       <f:facet name="header">Mark</f:facet>
+                       #{question.mark}
+                    </h:column>
+
+                 </h:dataTable>
+                <br></br>
+                <h:outputText id="questionCount" value="0 question(s) selected."/>
+            </div>
+
+            <h:commandButton value="Save Quiz" action="submit"/>  
+        </h:form>
+        
+        </ui:define>
+      </ui:composition>
+   </body>
+</html>
