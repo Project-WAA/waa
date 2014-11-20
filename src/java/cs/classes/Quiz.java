@@ -14,17 +14,51 @@ public class Quiz  implements java.io.Serializable {
 
      private Integer quizId;
      private String quizDescription;
-     private Date quizStartDatetime;
-     private Date quizendDatetime;
-     private Set<Questions> questionses = new HashSet<Questions>(0);
+     private String quizStartDatetime;
+     private String quizEndDatetime;
 
-    public Quiz() {
+    public String getQuizStartDatetime() {
+        return quizStartDatetime;
     }
 
-    public Quiz(String quizDescription, Date quizStartDatetime, Date quizendDatetime, Set<Questions> questionses) {
+    public void setQuizStartDatetime(String quizStartDatetime) {
+        this.quizStartDatetime = quizStartDatetime;
+    }
+
+    public String getQuizEndDatetime() {
+        return quizEndDatetime;
+    }
+
+    public void setQuizEndDatetime(String quizEndDatetime) {
+        this.quizEndDatetime = quizEndDatetime;
+    }
+     private Set<Questions> questionses = new HashSet<Questions>(0);
+     private String CourseId;
+
+    public String getCourseId() {
+        if(CourseId == null)
+        {
+            return "1";
+        }
+        else
+        {
+            return CourseId;
+        }
+    }
+
+    public void setCourseId(String CourseId) {
+        this.CourseId = CourseId;
+    }
+     
+    public Quiz() 
+    {
+        
+    }
+
+    public Quiz(String quizDescription, String quizStartDatetime, String quizendDatetime, Set<Questions> questionses) {
        this.quizDescription = quizDescription;
        this.quizStartDatetime = quizStartDatetime;
-       this.quizendDatetime = quizendDatetime;
+       this.quizEndDatetime = quizendDatetime;
        this.questionses = questionses;
     }
    
@@ -42,20 +76,7 @@ public class Quiz  implements java.io.Serializable {
     public void setQuizDescription(String quizDescription) {
         this.quizDescription = quizDescription;
     }
-    public Date getQuizStartDatetime() {
-        return this.quizStartDatetime;
-    }
-    
-    public void setQuizStartDatetime(Date quizStartDatetime) {
-        this.quizStartDatetime = quizStartDatetime;
-    }
-    public Date getQuizendDatetime() {
-        return this.quizendDatetime;
-    }
-    
-    public void setQuizendDatetime(Date quizendDatetime) {
-        this.quizendDatetime = quizendDatetime;
-    }
+   
     public Set<Questions> getQuestionses() {
         return this.questionses;
     }

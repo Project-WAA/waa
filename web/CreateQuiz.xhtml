@@ -1,25 +1,22 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-   <head><title>IGNORED</title></head>
-   <body>
-      <ui:composition template="/templates/masterLayout.xhtml">
-         <ui:define name="windowTitle">
-            #{msgs.loginTitle}
-         </ui:define>
+<ui:composition template="/templates/masterLayout.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="windowTitle">
+        #{msgs.loginTitle}
+    </ui:define>
 
-         <ui:define name="heading">
-            <ui:include src="/sections/professor/header.xhtml"/>
-         </ui:define>
+    <ui:define name="heading">
+        <ui:include src="/sections/professor/header.xhtml"/>
+    </ui:define>
 
-         <ui:define name="sidebarLeft">
-            <ui:include src="/sections/professor/sidebarLeft.xhtml"/>
-         </ui:define>
+    <ui:define name="sidebarLeft">
+        <ui:include src="/sections/professor/sidebarLeft.xhtml"/>
+    </ui:define>
 
-         <ui:define name="content">
+    <ui:define name="content">
         <h:form>
             <h2>Create Quiz</h2>
             <hr></hr>
@@ -30,11 +27,11 @@
                         <h:outputText value="Course: "/>
                     </td>
                     <td>
-                        <h:selectOneListbox id="ddlCourse" >
-                            <f:selectItem id="item1" itemLabel="Web Application Architecture" itemValue="waa" />
-                            <f:selectItem id="item2" itemLabel="Software Engineering" itemValue="se" />
+                        <h:selectOneListbox value="#{quizBean.quiz.courseId}" id="ddlCourse" style="height: 60px" >
+                            <f:selectItem id="item1" itemLabel="Web Application Architecture" itemValue="1" />
+                            <f:selectItem id="item2" itemLabel="Software Engineering" itemValue="2" />
 
-                         </h:selectOneListbox>
+                        </h:selectOneListbox>
                     </td>
                     <td width="50px"></td>
                     <td>
@@ -42,7 +39,7 @@
 
                     </td>
                     <td>
-                        <h:inputText id="txtStart" />
+                        <h:inputText id="txtStart" value="#{quizBean.quiz.quizStartDatetime}"  />
 
                     </td>
                     <td></td>
@@ -53,7 +50,7 @@
 
                     </td>
                     <td>
-                        <h:inputText id="txtQuizTitle" />
+                        <h:inputText id="txtQuizTitle" value="#{quizBean.quiz.quizDescription}" style="width: 190px"/>
                     </td>
                     <td width="50px"></td>
                     <td>
@@ -61,7 +58,9 @@
 
                     </td>
                     <td>
-                         <h:inputText id="txtEnd" />
+                        <p:calendar id="datetime" value="#{quizBean.quiz.quizEndDatetime}" pattern="MM/dd/yyyy HH:mm:ss" />
+                        
+
                     </td>
                     <td></td>
                 </tr>
@@ -100,34 +99,44 @@
             </table>
 
 
+
             <div>
-                <h:outputText value="List of questions"/>
-                 <h:dataTable value="#{quizItem.questions}" var="question"
-                    styleClass="employeeTable"
-                    headerClass="employeeTuserDataableHeader"
-                    rowClasses="employeeTableOddRow,employeeTableEvenRow">
+
+                <div><u><b>Select questions from the list below.</b></u></div>
+
+                <h:dataTable value="#{quizBean.questionList}" var="question" >
                     <h:column>    				
-                       <f:facet name="header">Select</f:facet>    				
-                       <h:selectManyCheckbox id="chkSelct" ></h:selectManyCheckbox>
+                        <f:facet name="header">Select</f:facet>    	
+
+                        <h:selectManyCheckbox value="#{question.selectedQuestion}">
+                            <f:selectItem itemValue="#{question.questionId}"
+                                          itemLabel="" >
+                            </f:selectItem>
+                        </h:selectManyCheckbox>
+
+
                     </h:column>
                     <h:column>
-                       <f:facet name="header">Question</f:facet>
-                       #{question.question}
+                        <f:facet name="header">Mark</f:facet>
+                            #{question.mark}
                     </h:column>
                     <h:column>
-                       <f:facet name="header">Mark</f:facet>
-                       #{question.mark}
+                        <f:facet name="header">Question</f:facet>
+                            #{question.questionDescription}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Created By</f:facet>
+                            #{question.enteredBy} 
                     </h:column>
 
-                 </h:dataTable>
+                </h:dataTable>
                 <br></br>
                 <h:outputText id="questionCount" value="0 question(s) selected."/>
             </div>
 
-            <h:commandButton value="Save Quiz" action="submit"/>  
+            <h:commandButton value="Save Quiz" action="#{quizBean.createQuiz()}" ></h:commandButton> 
+
         </h:form>
-        
-        </ui:define>
-      </ui:composition>
-   </body>
-</html>
+
+    </ui:define>
+</ui:composition>

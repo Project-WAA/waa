@@ -5,7 +5,7 @@
  */
 package cs.bean;
 
-import cs.database.QuestionEntity;
+import cs.database.Entity;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -46,6 +46,7 @@ public class QuestionBean implements Serializable{
         optionsList = new ArrayList<Answeroptions>();
         return "createQuestion";
     }
+
 
     
     public Questions getQuestion() {
@@ -107,7 +108,7 @@ public class QuestionBean implements Serializable{
     {
         try 
         {
-                QuestionEntity qe = new QuestionEntity();
+                Entity qe = new Entity();
 
                 int qID = qe.SaveQuestion(question);
                 if(qID > 0)
@@ -132,22 +133,9 @@ public class QuestionBean implements Serializable{
                     {
             //Logger.getLogger(QuestionBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-            /*
-            for(int i=0;i<selectedOptionsList.size();i++)
-            {
-            for(int j=0;j<optionsList.size();j++)
-            {
-            if(selectedOptionsList.get(i).getAnswerOptionsId() == optionsList.get(j).getAnswerOptionsId())
-            {
-            //optionsList.get(j).setIsAnswer(Boolean.TRUE);
-            break;
-            }
-            }
-            }
-            */
-        
-        
+          
         
     }
+    
+    
 }

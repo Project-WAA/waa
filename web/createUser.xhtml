@@ -1,0 +1,62 @@
+
+<ui:composition template="/templates/masterLayout.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="windowTitle">
+        #{msgs.loginTitle}
+    </ui:define>
+
+    <ui:define name="heading">
+        <ui:include src="/sections/professor/header.xhtml"/>
+    </ui:define>
+
+    <ui:define name="sidebarLeft">
+        <ui:include src="/sections/login/sidebarLeft.xhtml"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <div>Create User</div>
+        <h:form>
+            <h:panelGrid columns="2">
+                #{loginBean.loginUser.userName}
+                UserName:<h:inputText id="UserName" value="#{loginBean.loginUser.userName}" required="true">
+                    <h:message for="UserName" style="color:red" /><br/>
+                </h:inputText>
+                Password:<h:inputSecret id="password" value="#{loginBean.loginUser.password}" required="true"></h:inputSecret>
+                First Name:<h:inputText id="FirstName" value="#{loginBean.loginUser.firstName}" required="true"></h:inputText>
+                Last Name:<h:inputText id="LastName" value="#{loginBean.loginUser.lastName}" required="true"></h:inputText>
+                Account type:
+                <h:selectOneRadio id="UserType" value="#{loginBean.loginUser.userType}">
+                    <f:selectItem itemValue="1" itemLabel="Professor" />
+                    <f:selectItem itemValue="2" itemLabel="Student"  />
+                </h:selectOneRadio>
+                <h:commandButton value="Create User" action="#{loginBean.createUser()}"></h:commandButton>
+                <h:commandButton value="Clear" action="#{loginBean.createUserClear()}" ></h:commandButton>
+            </h:panelGrid>
+
+            <br></br>
+
+            <h:dataTable value="#{loginBean.userList}" var="myUser">
+                <f:facet name="header">  
+                    <h:outputText value="User List" />  
+                </f:facet>   
+                <h:column>
+                    <f:facet name="header">First Name</f:facet> #{myUser.firstName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Last Name</f:facet> #{myUser.lastName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">User Name</f:facet> #{myUser.userName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">User Type</f:facet> #{myUser.userType}
+                </h:column>
+
+
+            </h:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

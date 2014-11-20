@@ -17,6 +17,34 @@ public class Questions  implements java.io.Serializable {
      private Set<Answeroptions> answeroptionses = new HashSet<Answeroptions>(0);
      private Integer mark;
      private String course;
+     private boolean isSelected;
+     private String EnteredBy;
+     private String[] selectedQuestion = {};
+
+    public String[] getSelectedQuestion() {
+        return selectedQuestion;
+    }
+
+    public void setSelectedQuestion(String[] selectedQuestion) {
+        this.selectedQuestion = selectedQuestion;
+    }
+     
+
+    public String getEnteredBy() {
+        return EnteredBy;
+    }
+
+    public void setEnteredBy(String EnteredBy) {
+        this.EnteredBy = EnteredBy;
+    }
+
+    public boolean isIsSelected() {
+        return isSelected;
+    }
+
+    public void setIsSelected(boolean isSelected) {
+        this.isSelected = isSelected;
+    }
 
     public String getCourse() {
         return course;

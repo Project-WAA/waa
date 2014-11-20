@@ -22,6 +22,7 @@ public final class connectMySql {
 	private static Connection conn;
 	Statement statement;
         
+        
 	public connectMySql(){
 	
 	}
@@ -100,7 +101,7 @@ public final class connectMySql {
      
         public static ResultSet select(String qry)
         {
-            
+            getConnectionDB();
             try
             {
                 Statement statement = (Statement) conn.createStatement();
@@ -112,22 +113,6 @@ public final class connectMySql {
             
             return null;
         }
-//        
-//       public String logincheck(){
-//          	try {
-//                    	getConnectionDB();
-//                        statement= (Statement) conn.createStatement();
-//                        String qry="Insert into test(name)"+"values('"+getName()+"')";
-//                        
-//		statement.execute(qry);
-//		
-//                } catch (SQLException e) {
-//                        // TODO Auto-generated catch block
-//                        e.printStackTrace();
-//                        return "index";
-//                }
-//           
-//           return "welcomePrimefaces";
-//       }
+
         
 }

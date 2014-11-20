@@ -18,9 +18,9 @@
                         </h:commandLink>
                     </div>
                     <div class="welcomeImage">
-                        <a href="CreateQuiz.xhtml">
+                        <h:commandLink action="#{quizBean.redirectCreateQuiz()}">
                             <h:graphicImage library="images" name="quiz.jpg" width="100"/><br></br>
-                            Create Quiz</a>
+                            Create Quiz </h:commandLink>
                     </div>
                     <div class="welcomeImage">
                         <a href="AssignQuiz.xhtml">

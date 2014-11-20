@@ -22,14 +22,14 @@
             <h:form>
                <h:panelGrid columns="2">
                   UserName:
-                  <h:inputText id="name"  />
+                  <h:inputText id="name" value="#{loginBean.currentUser.userName}"  />
                   Password:
-                  <h:inputSecret id="password"  />
+                  <h:inputSecret id="password" value="#{loginBean.currentUser.password}" />
                </h:panelGrid>
                
                    <div style="margin-left: 168px">
                        
-                       <h:commandButton value="Login" action="createQuestion"/>
+                       <h:commandButton value="Login" action="#{loginBean.submitLogin()}"/>
                   </div>
                
             </h:form>
