@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head><title>IGNORED</title></head>
+    <body>
+        <ui:composition template="/templates/masterLayout.xhtml">
+            <ui:define name="windowTitle">
+                #{msgs.loginTitle}
+            </ui:define>
+
+            <ui:define name="heading">
+                <ui:include src="/sections/student/header.xhtml"/>
+            </ui:define>
+
+            <ui:define name="sidebarLeft">
+                <ui:include src="/sections/student/sidebarLeft.xhtml"/>
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form>
+                    <h2>Attempt quiz here</h2>
+
+                    <hr></hr>
+
+                    <h3> under construction</h3>
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>

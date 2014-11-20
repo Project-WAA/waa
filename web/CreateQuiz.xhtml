@@ -39,7 +39,7 @@
 
                     </td>
                     <td>
-                        <h:inputText id="txtStart" value="#{quizBean.quiz.quizStartDatetime}"  />
+                        <p:calendar id="datetimeStart" value="#{quizBean.quiz.endDateTime}" pattern="MM/dd/yyyy HH:mm:ss" />
 
                     </td>
                     <td></td>
@@ -58,7 +58,7 @@
 
                     </td>
                     <td>
-                        <p:calendar id="datetime" value="#{quizBean.quiz.quizEndDatetime}" pattern="MM/dd/yyyy HH:mm:ss" />
+                        <p:calendar id="datetimeEnd" value="#{quizBean.quiz.endDateTime}" pattern="MM/dd/yyyy HH:mm:ss" />
                         
 
                     </td>
@@ -133,8 +133,28 @@
                 <br></br>
                 <h:outputText id="questionCount" value="0 question(s) selected."/>
             </div>
+            <table>
+                <tr>
+                    <td style="vertical-align: top; width: 400px;">
+                        <h:commandButton value="Save Quiz" action="#{quizBean.createQuiz()}" ></h:commandButton> 
+                    </td>
+                    <td>
+                        <h:dataTable value="#{quizBean.quizList}" var="qz" >
 
-            <h:commandButton value="Save Quiz" action="#{quizBean.createQuiz()}" ></h:commandButton> 
+                                        <h:column>
+                                            <f:facet name="header">Quiz Title  </f:facet>
+                                                #{qz.quizDescription}
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Created By</f:facet>
+                                                #{qz.enteredBy}
+                                        </h:column>
+                                    </h:dataTable>
+                    </td>
+                </tr>
+            </table>
+                
+            
 
         </h:form>
 

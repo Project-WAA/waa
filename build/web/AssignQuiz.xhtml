@@ -30,9 +30,9 @@
                         <h:outputText value="Quiz Title "/>
                     </td>
                     <td>
-                        <h:selectOneListbox id="ddlQuizTitle" style="width: 257px" >
-                            <f:selectItem id="w1d1" itemLabel="Week1 Day1 Quiz" itemValue="11" />
-                            <f:selectItem id="w1d2" itemLabel="Week One Day Two" itemValue="12" />
+                        <h:selectOneListbox id="ddlQuizTitle" value="#{quizBean.quizList}" style="width: 257px" >
+                            <f:selectItems value="#{quizBean.quizList}" var="qz"
+                                           itemValue="#{qz.quizId}" itemLabel="#{qz.quizDescription}" />
 
                          </h:selectOneListbox>
                     </td>
@@ -44,32 +44,40 @@
 
 
             <div>
-                <h:outputText value="Select Users"/>
-                 <h:dataTable value="#{users.userlist}" var="user">
+                <div><u><b>Assign Quiz to Users from the list below.</b></u></div><br></br>
+
+                <h:dataTable value="#{loginBean.studentUserList}" var="usr" >
                     <h:column>    				
-                       <f:facet name="header">Select</f:facet>    				
-                       <h:selectManyCheckbox id="chkSelct" ></h:selectManyCheckbox>
+                        <f:facet name="header">Select</f:facet>    	
+
+                        <h:selectManyCheckbox value="#{usr.selectedUsers}">
+                            <f:selectItem itemValue="#{usr.userName}"
+                                          itemLabel="" >
+                            </f:selectItem>
+                        </h:selectManyCheckbox>
+
+
                     </h:column>
                     <h:column>
-                       <f:facet name="header">First Name</f:facet>
-                       #{user.firstName}
-                    </h:column>
-                              <h:column>
-                       <f:facet name="header">Last Name</f:facet>
-                       #{user.lastName}
+                        <f:facet name="header">Last Name</f:facet>
+                            #{usr.lastName}
                     </h:column>
                     <h:column>
-                       <f:facet name="header">User Name</f:facet>
-                       #{user.userName}
+                        <f:facet name="header">First Name</f:facet>
+                            #{usr.firstName}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">User Name</f:facet>
+                            #{usr.userName} 
                     </h:column>
 
-                 </h:dataTable>
+                </h:dataTable>
                 <br></br>
                 <h:outputText id="questionCount" value="0 user(s) selected."/>
             </div>
 
             <hr></hr>
-            <h:commandButton value="Save" action="submit"/>  
+            <h:commandButton value="Save" action="#{loginBean.assignQuizToUser()}"/>  
         </h:form>
         
         </ui:define>

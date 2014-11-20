@@ -2,6 +2,7 @@ package cs.classes;
 // Generated Nov 18, 2014 7:49:01 PM by Hibernate Tools 3.6.0
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,24 +15,44 @@ public class Quiz  implements java.io.Serializable {
 
      private Integer quizId;
      private String quizDescription;
-     private String quizStartDatetime;
-     private String quizEndDatetime;
+     private Date startDateTime;
+     private String enteredBy;
 
-    public String getQuizStartDatetime() {
-        return quizStartDatetime;
+    public String getEnteredBy() {
+        return enteredBy;
     }
 
-    public void setQuizStartDatetime(String quizStartDatetime) {
-        this.quizStartDatetime = quizStartDatetime;
+    public void setEnteredBy(String enteredBy) {
+        this.enteredBy = enteredBy;
+    }
+     private ArrayList<User> userList = new ArrayList<User>();
+
+    public ArrayList<User> getUserList() {
+        return userList;
     }
 
-    public String getQuizEndDatetime() {
-        return quizEndDatetime;
+    public void setUserList(ArrayList<User> userList) {
+        this.userList = userList;
     }
 
-    public void setQuizEndDatetime(String quizEndDatetime) {
-        this.quizEndDatetime = quizEndDatetime;
+    public Date getStartDateTime() {
+        return startDateTime;
     }
+
+    public void setStartDateTime(Date startDateTime) {
+        this.startDateTime = startDateTime;
+    }
+
+    public Date getEndDateTime() {
+        return endDateTime;
+    }
+
+    public void setEndDateTime(Date endDateTime) {
+        this.endDateTime = endDateTime;
+    }
+     private Date endDateTime;
+
+ 
      private Set<Questions> questionses = new HashSet<Questions>(0);
      private String CourseId;
 
@@ -55,10 +76,10 @@ public class Quiz  implements java.io.Serializable {
         
     }
 
-    public Quiz(String quizDescription, String quizStartDatetime, String quizendDatetime, Set<Questions> questionses) {
+    public Quiz(String quizDescription, Date quizStartDatetime, Date quizendDatetime, Set<Questions> questionses) {
        this.quizDescription = quizDescription;
-       this.quizStartDatetime = quizStartDatetime;
-       this.quizEndDatetime = quizendDatetime;
+       this.startDateTime = quizStartDatetime;
+       this.endDateTime = quizendDatetime;
        this.questionses = questionses;
     }
    

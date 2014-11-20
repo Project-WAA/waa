@@ -134,6 +134,8 @@ public class QuestionBean implements Serializable{
             //Logger.getLogger(QuestionBean.class.getName()).log(Level.SEVERE, null, ex);
         }
           
+        QuizBean qb = new QuizBean();
+        qb.getAllQuestions(1);
         
     }
     

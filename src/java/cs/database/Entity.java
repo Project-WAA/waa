@@ -5,6 +5,7 @@
  */
 package cs.database;
 
+import cs.bean.LoginBean;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,9 +48,9 @@ public class Entity
         {
             courseId = Integer.parseInt(question.getCourse());
         }
-        String qry="Insert into Questions(CourseId,QuestionDescription,Answer,Mark,EnteredBy)"+
+        String qry="Insert into Questions(CourseId,QuestionDescription,EnteredBy,Mark)"+
                 "values("+courseId+",'"+question.getQuestionDescription()+"'," + currentUserName +"," +
-                question.getMark()+"," +question.getMark()+ ")";
+                question.getMark()+")";
         
         System.out.println(qry);
         int id = connectMySql.insetAndGetID(qry);
@@ -78,9 +79,11 @@ public class Entity
   
     public int SaveQuiz(Quiz quiz)
     {
-        String qry="Insert into Quiz(QuizDescription,quizStartDatetime,quizendDatetime,Enteredby)"+
-                "values('"+quiz.getQuizDescription()+"','"+quiz.getQuizStartDatetime()+"','"+
-                quiz.getQuizStartDatetime()+"','"+quiz.getQuizEndDatetime()+"')";
+        String qry="Insert into Quiz(QuizDescription,Enteredby)"+ //quizStartDatetime,quizendDatetime,
+                "values('"+quiz.getQuizDescription()+"','"+
+                //quiz.getStartDateTime()+"','"+
+                //quiz.getEndDateTime()+"','"+
+                currentUserName+"')";
         
         System.out.println(qry);
         int id = connectMySql.insetAndGetID(qry);
@@ -88,19 +91,39 @@ public class Entity
 
     }
     
-    public boolean SaveQuizQuestions(int quizId, String[] questionList)
+    public boolean SaveQuizQuestions(int quizId, ArrayList<Questions> questionList)
     {
-        for(String q : questionList)
-        {
-            //if(q.equals(q))
+        for(Questions as:questionList){
+            for(String a:as.getSelectedQuestion())
             {
-                String qry="Insert into Quiz(QuestionID,QuizID)"+
-                    "values('"+q+"','"+quizId+"')";
+                String qry="Insert into QuizQuestions(QuestionID,QuizID)"+
+                    "values('"+a+"','"+quizId+"')";
 
                 System.out.println(qry);
                 boolean result = connectMySql.insert(qry);
             }
         }
+        
+        
+        
+        return true;
+
+    }
+    
+    public boolean AssignQuizToUser(ArrayList<User> userList, int quizId)
+    {
+        for(User as:userList){
+            for(String a:as.getSelectedUsers())
+            {
+                String qry="Insert into QuizUser(QuizID,UserID)"+
+                    "values('"+quizId+"','"+a+"')";
+
+                System.out.println(qry);
+                boolean result = connectMySql.insert(qry);
+            }
+        }
+        
+        
         
         return true;
 
@@ -124,5 +147,30 @@ public class Entity
          
      }
      
+     public ResultSet getAllStudentUser(int type){
+         String qry="Select * from Users where userType = " + type +";";
+         System.out.println(qry);
+         ResultSet reasult=connectMySql.select(qry);
+         return reasult;
+         
+         
+     }
+     
+     public ResultSet getAllQuizes(){
+         String qry="Select * from Quiz;";
+         System.out.println(qry);
+         ResultSet reasult=connectMySql.select(qry);
+         return reasult;
+         
+         
+     }
+     
+    public ResultSet checkuser(User currentUser){
+         
+         String qry="SELECT IF( EXISTS(SELECT * FROM users WHERE  username=  '"+currentUser.getUserName()+"' and password=md5('"+currentUser.getPassword()+"')) , (SELECT userType FROM users WHERE  username=  '"+currentUser.getUserName()+"' and password=md5('"+currentUser.getPassword()+"') ),(select 0) )as usercheck;";
+         System.out.println(qry);
+         ResultSet reasult1=connectMySql.select(qry);
+        return reasult1;      
+     }
     
 }

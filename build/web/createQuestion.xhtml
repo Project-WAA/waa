@@ -1,125 +1,164 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-   <head><title>Create Questions</title></head>
-   <body>
-      <ui:composition template="/templates/masterLayout.xhtml">
-         <ui:define name="windowTitle">
-            #{msgs.loginTitle}
-         </ui:define>
+    <head><title>Create Questions</title></head>
+    <body>
+        <ui:composition template="/templates/masterLayout.xhtml">
+            <ui:define name="windowTitle">
+                #{msgs.loginTitle}
+            </ui:define>
 
-         <ui:define name="heading">
-            <ui:include src="/sections/professor/header.xhtml"/>
-         </ui:define>
+            <ui:define name="heading">
+                <ui:include src="/sections/professor/header.xhtml"/>
+            </ui:define>
 
-         <ui:define name="sidebarLeft">
-            <ui:include src="/sections/professor/sidebarLeft.xhtml"/>
-         </ui:define>
+            <ui:define name="sidebarLeft">
+                <ui:include src="/sections/professor/sidebarLeft.xhtml"/>
+            </ui:define>
 
-         <ui:define name="content">
-        <h:form>
-            <h2>Create Questions</h2>
-            <hr></hr>
+            <ui:define name="content">
+                <h:form>
+                    <h2>Create Questions</h2>
+                    <hr></hr>
 
-            <table>
-                <tr>
-                    <td>
-                        <h:outputText value="Course: "/>
-                    </td>
-                    <td>
-                        <h:selectOneListbox id="ddlCourse" value="#{questionBean.question.course}" style="width: 257px">
-                            <f:selectItem id="item1" itemLabel="Web Application Architecture" itemValue="1" />
-                            <f:selectItem id="item2" itemLabel="Software Engineering" itemValue="2" />
+                    <table>
+                        <tr>
+                            <td>
+                                <h:outputText value="Course: "/>
+                            </td>
+                            <td>
+                                <h:selectOneListbox id="ddlCourse" value="#{questionBean.question.course}" style="width: 257px">
+                                    <f:selectItem id="item1" itemLabel="Web Application Architecture" itemValue="1" />
+                                    <f:selectItem id="item2" itemLabel="Software Engineering" itemValue="2" />
 
-                         </h:selectOneListbox><br></br>
-                    </td>
-                    <td width="50px"></td>
-                    <td>
-                        <h:outputText value="Options: "/>
+                                </h:selectOneListbox><br></br>
+                            </td>
+                            <td width="50px"></td>
+                            <td>
+                                <h:outputText value="Options: "/>
 
-                    </td>
-                    <td>
-                        <h:inputTextarea id="txtOption" value="#{questionBean.option.answerItem}" style="width: 250px"/>
+                            </td>
+                            <td>
+                                <h:inputTextarea id="txtOption" value="#{questionBean.option.answerItem}" style="width: 250px"/>
 
-                    </td>
-                    <td>
-                        
-                        <h:commandButton value="Add Option" action="#{questionBean.addOptions()}" >
-                            
-                        </h:commandButton>
-                       
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                         <h:outputText value="Question: "/>
+                            </td>
+                            <td>
 
-                    </td>
-                    <td>
-                        <h:inputTextarea id="txtQuestion" value="#{questionBean.question.questionDescription}" style="width: 250px" />
-                    </td>
-                    <td width="50px"></td>
-                    <td rowspan="3" colspan="3">
-                        <div id="divOptions">
-                            <h:selectOneRadio id="chkOptions" value="#{questionBean.correctAnswerItem}" layout="pageDirection">
-                                <f:selectItems 
-                                    value="#{questionBean.optionsList}" var="opt"
-                                    itemValue="#{opt.answerItem}" itemLabel="#{opt.answerItem}" />
+                                <h:commandButton value="Add Option" action="#{questionBean.addOptions()}" >
 
-                            </h:selectOneRadio >
-                        </div>
-                    </td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>
-                        <h:outputText value="Answer: "/>
+                                </h:commandButton>
 
-                    </td>
-                    <td>
-                        <h:inputTextarea id="txtAnswer" style="width: 250px"/><br></br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:outputText value="Question: "/>
 
-                    </td>
-                    <td width="50px"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                            </td>
+                            <td>
+                                <h:inputTextarea id="txtQuestion" value="#{questionBean.question.questionDescription}" style="width: 250px" />
+                            </td>
+                            <td width="50px"></td>
+                            <td rowspan="3" colspan="3">
+                                <div id="divOptions">
+                                    <h:selectOneRadio id="chkOptions" value="#{questionBean.correctAnswerItem}" layout="pageDirection">
+                                        <f:selectItems 
+                                            value="#{questionBean.optionsList}" var="opt"
+                                            itemValue="#{opt.answerItem}" itemLabel="#{opt.answerItem}" />
 
-                <tr>
-                    <td>
-                        <h:outputText value="Mark: "/>
+                                    </h:selectOneRadio >
+                                </div>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:outputText value="Answer: "/>
 
-                    </td>
-                    <td>
-                        <h:inputText id="txtMark" value="#{questionBean.question.mark}" style="width: 50px"/><br></br>
-                    </td>
-                    <td width="50px"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td width="50px"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                            </td>
+                            <td>
+                                <h:inputTextarea id="txtAnswer" style="width: 250px"/><br></br>
 
-            </table>
-            <hr></hr>
-            
+                            </td>
+                            <td width="50px"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
 
-             
-            <h:commandButton value="Save" action="#{questionBean.saveQuestion()}"></h:commandButton>
-         </h:form>
-        </ui:define>
-      </ui:composition>
-   </body>
+                        <tr>
+                            <td>
+                                <h:outputText value="Mark: "/>
+
+                            </td>
+                            <td>
+                                <h:inputText id="txtMark" value="#{questionBean.question.mark}" style="width: 50px"/><br></br>
+                            </td>
+                            <td width="50px"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td width="50px"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                    </table>
+                    <hr></hr>
+
+
+                    <table>
+                        <tr>
+                            <td style="vertical-align: top; width: 400px;">
+                                <h:commandButton value="Save" action="#{questionBean.saveQuestion()}"></h:commandButton>
+                            </td>
+                            <td>
+                                <div style="float: right">
+                                    <h:dataTable value="#{quizBean.questionList}" var="question" >
+
+                                        <h:column>
+                                            <f:facet name="header">Mark  </f:facet>
+                                                #{question.mark}
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Question</f:facet>
+                                                #{question.questionDescription}
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Created By</f:facet>
+                                                #{question.enteredBy} 
+                                        </h:column>
+                                        <!--                    <h:column>    				
+                                                                <f:facet name="header">Options</f:facet>    	
+                                        
+                                                                <h:selectOneRadio readonly="true" id="chkOptions" value="{questionBean.correctAnswerItem}" layout="pageDirection">
+                                                                        <f:selectItems 
+                                                                            value="{question.answeroptionses}" var="opt"/>
+                                        
+                                                                    </h:selectOneRadio >
+                                        
+                                        
+                                                            </h:column>-->
+                                    </h:dataTable>
+                                </div>
+                            </td>
+                        </tr>
+
+
+
+
+                    </table>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
 </html>

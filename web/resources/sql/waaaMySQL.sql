@@ -12,7 +12,7 @@ LastName varchar(255) not null
 );
 
 Insert into users(username,password,userType,firstName,LastName) 
-select 'waa' as username,md5('waa') as password,1 as userType, 'waa' as firstName ,'waa' as LastName; 
+select 'waa' as username,md5('waa') as password,2 as userType, 'waa' as firstName ,'waa' as LastName; 
  
 
 
@@ -39,6 +39,7 @@ EnteredBy varchar(255)
 
 Insert into Courses(CourseDescription,EnteredBy) 
 select 'Web Application Architecture','adminUser' 
+
 union all select 'software programming','adminUser'  ; 
 
 
@@ -58,6 +59,13 @@ QuizQuestionsID int primary key auto_increment,
 QuestionID int, 
 QuizID int
 ); 
+
+create table waademoproject.QuizUser( 
+QuizUserID int primary key auto_increment, 
+QuizID int, 
+UserID varchar(255)
+);
+
 
 /*alter table Questions  add foreign key(quizID) REFERENCES  quiz(quizID);
 

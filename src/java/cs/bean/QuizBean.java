@@ -26,6 +26,15 @@ public class QuizBean implements Serializable
 {
     private Quiz quiz = new Quiz();
     private ArrayList<Questions> questionList = new ArrayList<Questions>();
+    private ArrayList<Quiz> quizList = new ArrayList<Quiz>();
+
+    public ArrayList<Quiz> getQuizList() {
+        return quizList;
+    }
+
+    public void setQuizList(ArrayList<Quiz> quizList) {
+        this.quizList = quizList;
+    }
     private String[] selectedQuestion = {};
 
     public String[] getSelectedQuestion() {
@@ -90,6 +99,7 @@ public class QuizBean implements Serializable
     public QuizBean()
     {
         getAllQuestions(Integer.parseInt(this.quiz.getCourseId()));
+        getAllQuizes();
     }
     String test;
 
@@ -103,18 +113,13 @@ public class QuizBean implements Serializable
     
     public String createQuiz()
     {
+        
         Entity qe = new Entity();
         int quizId = qe.SaveQuiz(quiz);
-        for(Questions as:questionList){
-            for(String a:as.getSelectedQuestion())
-            {
-                System.out.println("quiz selected:"+ a);
-            }
-        }
         if(quizId > 0)
         {
-            qe.SaveQuizQuestions(quizId, selectedQuestion);
-            System.out.println("quizQuestion saved");
+            qe.SaveQuizQuestions(quizId, questionList);
+        
         }
         return "";
     }
@@ -125,5 +130,44 @@ public class QuizBean implements Serializable
         getAllQuestions(Integer.parseInt(this.quiz.getCourseId()));
         return "CreateQuiz";
     }
+    
+    public String redirectAssignQuiz(){
+        
+        getAllQuizes();
+        return "AssignQuiz";
+    }
+    
+    public void getAllQuizes()
+    {
+        quizList = new ArrayList<>();
+        
+        Entity qe = new Entity();
+
+        ResultSet rs = qe.getAllQuizes();
+        
+        try 
+        {
+            Quiz quiz ;
+            while(rs.next())
+            {
+                quiz = new Quiz();
+                quiz.setQuizId(rs.getInt("QuizID"));
+                quiz.setQuizDescription(rs.getString("QuizDescription"));
+                quiz.setEnteredBy(rs.getString("EnteredBy"));
+                
+                quizList.add(quiz);
+                
+                System.out.println(rs.getString("QuizDescription"));
+            }
+            
+            
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println("get all questions..." + ex.getMessage());
+        }
+        
+        
+    } 
     
 }

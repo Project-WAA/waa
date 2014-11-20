@@ -20,7 +20,7 @@
    position: absolute;
    right: 8px;
    left: 230px;
-   height: 400px;
+   min-height: 400px;
    top: 90px;
 }
 

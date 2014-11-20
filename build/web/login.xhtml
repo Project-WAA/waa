@@ -5,34 +5,101 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
    <head><title>Login</title></head>
    <body>
-      <ui:composition template="/templates/masterLayout.xhtml">
+      <ui:composition template="/templates/login.xhtml">
          <ui:define name="windowTitle">
             Login
          </ui:define>
 
-         <ui:define name="heading">
-            <ui:include src="/sections/login/header.xhtml"/>
-         </ui:define>
-
-         <ui:define name="sidebarLeft">
-            <ui:include src="/sections/login/sidebarLeft.xhtml"/>
-         </ui:define>
+        
 
          <ui:define name="content">
-            <h:form>
-               <h:panelGrid columns="2">
-                  UserName:
-                  <h:inputText id="name" value="#{loginBean.currentUser.userName}"  />
-                  Password:
-                  <h:inputSecret id="password" value="#{loginBean.currentUser.password}" />
-               </h:panelGrid>
-               
-                   <div style="margin-left: 168px">
-                       
-                       <h:commandButton value="Login" action="#{loginBean.submitLogin()}"/>
+             
+             
+             
+             <div class=" container">
+                 <div class="row">
+                     
+                    
+                     <section class="colorBg1 colorBg" id="demo1" data-panel="first">
+
+        <div class=" container">
+
+            <div class=" login-form-section">
+                <div class="login-content  animated bounceIn" data-animation="bounceIn">
+                   <div class="col-lg-12">
+            <div class="login-form-section" style="margin: auto 0;">
+                <div class="login-content  animated bounceIn" data-animation="bounceIn">
+                    <h:form>
+                
+                        <div class="section-title">
+                            <h3>LogIn to your Account</h3>
+                            <span style="color: red">#{loginBean.logineErrorMsg}</span>
+                        </div>
+                        <div class="textbox-wrap">
+                            <h:outputText value="Username" ></h:outputText>
+                            <div class="input-group">
+                                
+                                
+                                
+                                <h:inputText id="name" value="#{loginBean.currentUser.userName}" styleClass="form-control"  />
+                            </div>
+                        </div>
+                        <div class="textbox-wrap">
+                            <h:outputText value="Password" ></h:outputText>
+                            <div class="input-group">
+                                
+                               
+                                <h:inputSecret id="password" value="#{loginBean.currentUser.password}" styleClass="form-control" />
+                            </div>
+                        </div>
+                        <div class="login-form-action clearfix" style="margin-top: 20px;">
+                            
+                            <div style="margin-left: 168px">
+                                <h:commandButton value="Login" action="#{loginBean.submitLogin()}" styleClass="btn btn-default"/>
                   </div>
+                        </div>
+                     </h:form>
+                </div>
                
-            </h:form>
+            </div>
+                 </div>
+                </div>
+               
+            </div>
+
+
+
+        </div>
+    </section>
+                    
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                 </div>
+
+        </div>
+             
+             
          </ui:define>
       </ui:composition>
    </body>

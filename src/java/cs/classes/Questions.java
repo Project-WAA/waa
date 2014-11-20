@@ -2,6 +2,7 @@ package cs.classes;
 // Generated Nov 18, 2014 7:49:01 PM by Hibernate Tools 3.6.0
 
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,7 +15,15 @@ public class Questions  implements java.io.Serializable {
      private Integer questionId;
      private Quiz quiz;
      private String questionDescription;
-     private Set<Answeroptions> answeroptionses = new HashSet<Answeroptions>(0);
+     private ArrayList<Answeroptions> answeroptionses  = new ArrayList<Answeroptions>();
+
+    public ArrayList<Answeroptions> getAnsweroptionses() {
+        return answeroptionses;
+    }
+
+    public void setAnsweroptionses(ArrayList<Answeroptions> answeroptionses) {
+        this.answeroptionses = answeroptionses;
+    }
      private Integer mark;
      private String course;
      private boolean isSelected;
@@ -58,7 +67,7 @@ public class Questions  implements java.io.Serializable {
     public Questions() {
     }
 
-    public Questions(Quiz quiz, String questionDescription, Set<Answeroptions> answeroptionses, Integer mark,String course) {
+    public Questions(Quiz quiz, String questionDescription, ArrayList<Answeroptions> answeroptionses, Integer mark,String course) {
        this.quiz = quiz;
        this.questionDescription = questionDescription;
        this.answeroptionses = answeroptionses;
@@ -95,13 +104,7 @@ public class Questions  implements java.io.Serializable {
     public void setQuestionDescription(String questionDescription) {
         this.questionDescription = questionDescription;
     }
-    public Set<Answeroptions> getAnsweroptionses() {
-        return this.answeroptionses;
-    }
-    
-    public void setAnsweroptionses(Set<Answeroptions> answeroptionses) {
-        this.answeroptionses = answeroptionses;
-    }
+
 
 }
 

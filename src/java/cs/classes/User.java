@@ -16,7 +16,15 @@ public class User
     private String firstName;
     private String lastName;
     private String userType;
-    
+    private String[] selectedUsers = {};
+
+    public String[] getSelectedUsers() {
+        return selectedUsers;
+    }
+
+    public void setSelectedUsers(String[] selectedUsers) {
+        this.selectedUsers = selectedUsers;
+    }
     
     public String getUserName() {
         return userName;

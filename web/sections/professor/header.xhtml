@@ -8,9 +8,12 @@
     <body>
         <ui:composition>
             <div class="header">
-                Welcome to Professor
+                Welcome to QUIZ Setup, 
             </div>
             <div class="logouticon">
+                <span style="color: blue;font-style: italic;font: bold ">
+                                         #{loginBean.currentUser.userName}
+                                         </span>
                          <a href="login.xhtml">
                        <h:graphicImage library="images" name="logout.jpg" width="60"/><br></br>
                             </a>
