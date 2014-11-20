@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 
 /**
@@ -23,6 +24,24 @@ import javax.inject.Named;
 public class StudentBean implements Serializable
 {
     private ArrayList<Quiz> quizesList = new ArrayList<Quiz>();
+    private Quiz currentQuiz = new Quiz();
+    String QuizLinkId = "";
+
+    public Quiz getCurrentQuiz() {
+        return currentQuiz;
+    }
+
+    public void setCurrentQuiz(Quiz currentQuiz) {
+        this.currentQuiz = currentQuiz;
+    }
+
+    public String getQuizLinkId() {
+        return QuizLinkId;
+    }
+
+    public void setQuizLinkId(String QuizLinkId) {
+        this.QuizLinkId = QuizLinkId;
+    }
 
     public ArrayList<Quiz> getQuizesList() {
         return quizesList;
@@ -34,12 +53,19 @@ public class StudentBean implements Serializable
     
     public StudentBean()
     {
-        //getStudentQuizes();
+        getStudentQuizes();
     }
     
     public String attemptQuiz()
     {
+        
         return "AttemptQuiz";
+    }
+    
+    public void attemptClicked(ActionEvent event) 
+    {
+        QuizLinkId = event.getComponent().getId();
+        System.out.println("buttonid:"+QuizLinkId);
     }
     
     public String redirectQuizList()
@@ -72,7 +98,7 @@ public class StudentBean implements Serializable
                 
                 quizesList.add(quiz);
                 
-                System.out.println(rs.getString("QuizDescription"));
+                
             }
             
             

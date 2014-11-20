@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+    
+    <head><title>IGNORED</title></head>
+    <body>
+        <ui:composition>
+            <div class="header">
+                Create USERS here 
+            </div>
+            <div class="logouticon">
+                <span style="color: blue;font-style: italic;font: bold ">
+                                         #{loginBean.currentUser.userName}
+                                         </span>
+                         <a href="login.xhtml">
+                       <h:graphicImage library="images" name="logout.jpg" width="60"/><br></br>
+                            </a>
+            </div>
+        </ui:composition>
+    </body>
+</html>

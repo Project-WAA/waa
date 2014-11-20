@@ -26,10 +26,15 @@
                     <hr></hr>
 
                     <h:dataTable value="#{studentBean.quizesList}" var="q" >
-                        <h:column>    				
-                            <f:facet name="header">Quizes</f:facet>    	
-                            <h:commandLink value="#{q.quizDescription}" action="attemptQuiz" />
-
+                        <h:column>  
+                            <h:commandLink value="#{q.quizId}" action="#{studentBean.attemptQuiz()}"
+                                           actionListener="#{studentBean.attemptClicked}" >
+                                (Attempt this)
+                            </h:commandLink>
+                            #{q.quizDescription} 
+                            
+                            
+   
                         </h:column>
                         
 

@@ -85,7 +85,7 @@ public class LoginBean implements Serializable
                     //Session
                     HttpSession session = Util.getSession();
                     session.setAttribute("username", currentUser.getUserName());
-                    return "welcomePrimefaces";
+                    return "QuizList";
                 } else if (validUser == 3) { //admin
                     //Session
                     HttpSession session = Util.getSession();
@@ -151,13 +151,16 @@ public class LoginBean implements Serializable
         try {
             User user;
             while (rs.next()) {
-                user = new User();
-                user.setUserName(rs.getString("username"));
-                user.setFirstName(rs.getString("firstName"));
-                user.setLastName(rs.getString("LastName"));
-                user.setUserType(rs.getString("userType"));
-                userList.add(user);
-//                System.out.println("I'm @ try3");
+                if(!rs.getString("userType").equals("3"))
+                {
+                    user = new User();
+                    user.setUserName(rs.getString("username"));
+                    user.setFirstName(rs.getString("firstName"));
+                    user.setLastName(rs.getString("LastName"));
+                    user.setUserType(rs.getString("userType").equals("1") ? "Professor":"Student");
+                    userList.add(user);
+    //                System.out.println("I'm @ try3");
+                }
             }
              return userList;
         } catch (SQLException ex) {
