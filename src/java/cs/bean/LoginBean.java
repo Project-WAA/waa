@@ -7,12 +7,16 @@ package cs.bean;
 
 import cs.classes.User;
 import cs.database.Entity;
+import cs.database.util;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -20,11 +24,20 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class LoginBean implements Serializable
-{
-     private ArrayList<User> userList = new ArrayList<User>();
-     private Entity entity;
-     
+public class LoginBean implements Serializable {
+
+    private ArrayList<User> userList = new ArrayList<User>();
+    private Entity entity;
+    private String logineErrorMsg = null;
+
+    public String getLogineErrorMsg() {
+        return logineErrorMsg;
+    }
+
+    public void setLogineErrorMsg(String logineErrorMsg) {
+        this.logineErrorMsg = logineErrorMsg;
+    }
+
     private User loginUser = new User();
     private User currentUser = new User();
 
@@ -35,23 +48,14 @@ public class LoginBean implements Serializable
     public void setLoginUser(User loginUser) {
         this.loginUser = loginUser;
     }
-    
-    public LoginBean()
-    {
+
+    public LoginBean() {
         //System.out.println("LOGIN HERE");
-        loginUser = new User();   
+        loginUser = new User();
         entity = new Entity();
+        displayUser();
     }
-    
-    public String submitLogin()
-    {
-        if(currentUser.getUserName().equals("admin"))
-            return "createUser";
-        return "createQuestion";
-    }
-    
-    
-    
+
     public ArrayList<User> getUserList() {
         return userList;
     }
@@ -67,15 +71,58 @@ public class LoginBean implements Serializable
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
     }
-    
+
     public void createUser() {
         System.out.println("create USer");
         //User user= new User();
         entity.CreateUsers(loginUser);
         createUserClear();
-       
-        displayUser() ;
+
+        displayUser();
         //return "createQuestion";
+    }
+    util Util = new util();
+
+    public String submitLogin() {
+        ResultSet rs1 = entity.checkuser(currentUser);
+
+        try {
+            int validUser = 0;
+            while (rs1.next()) {
+                validUser = rs1.getInt("usercheck");
+                System.out.println("User Type " + validUser);
+                if (validUser == 1) { //professor
+                    //Session
+                    HttpSession session = Util.getSession();
+                    session.setAttribute("username", currentUser.getUserName());
+                    return "CreateQuiz";
+                } else if (validUser == 2) { //student
+                    //Session
+                    HttpSession session = Util.getSession();
+                    session.setAttribute("username", currentUser.getUserName());
+                    return "welcomePrimefaces";
+                } else if (validUser == 3) { //admin
+                    //Session
+                    HttpSession session = Util.getSession();
+                    session.setAttribute("username", currentUser.getUserName());
+                    return "createUser";
+                } else { //all other
+                    logineErrorMsg = "Please try Again!!, login Unsuccess :(";
+                    return "login";
+                }
+
+            }
+        } catch (Exception e) {
+        }
+//        if(currentUser.getUserName().equals("admin"))
+//            return "createUser";
+        return "createQuestion";
+    }
+
+    public String logout() {
+        HttpSession session = Util.getSession();
+        session.invalidate();
+        return "login";
     }
 
     public void createUserClear() {
@@ -87,7 +134,7 @@ public class LoginBean implements Serializable
 //        System.out.println("I'm @ try1");
         ResultSet rs = entity.displayUser();
 //        System.out.println("I'm @ try2");
-        userList=new ArrayList<User>();
+        userList = new ArrayList<User>();
         try {
             User user;
             while (rs.next()) {
@@ -99,11 +146,11 @@ public class LoginBean implements Serializable
                 userList.add(user);
 //                System.out.println("I'm @ try3");
             }
-             return userList;
+            return userList;
         } catch (SQLException ex) {
             System.out.println("get all User..." + ex.getMessage());
         }
         return userList;
     }
-    
+
 }
